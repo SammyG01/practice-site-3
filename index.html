@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember & Thyme | Modern Nigerian Dining in Peckham, London</title>
+<meta name="description" content="Ember & Thyme — modern Nigerian-inspired dining, grilled specialties and comfort food in Peckham, London. Order on WhatsApp, or dine in.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!--
+  THINGS TO EDIT (search for the word EDIT):
+  EDIT  Phone/WhatsApp numbers: search 442079460958 and replace with the real number.
+  EDIT  Address: the Location block in Contact.
+  EDIT  Menu prices: all placeholders here are realistic estimates, not real prices — confirm before real use.
+-->
+
+<style>
+:root {
+  --charcoal: #171717;
+  --terracotta: #C65D3B;
+  --cream: #F7F1E7;
+  --sage: #536B57;
+  --white: #FFFFFF;
+  --line: #E6DCC9;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Work Sans", system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+h1, h2, h3, .brand {
+  font-family: "Fraunces", "Work Sans", serif;
+  font-weight: 600;
+  line-height: 1.08;
+}
+a { color: var(--terracotta); }
+:focus-visible { outline: 3px solid var(--terracotta); outline-offset: 3px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 54px; padding: 0 30px; border-radius: 4px;
+  background: var(--terracotta); color: var(--white);
+  font-weight: 600; text-decoration: none; letter-spacing: 0.01em;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: #AE4E30; }
+.btn-ghost {
+  background: transparent; color: var(--charcoal);
+  border: 1.5px solid var(--charcoal);
+}
+.btn-ghost:hover { background: var(--charcoal); color: var(--white); }
+.btn-sm { min-height: 44px; padding: 0 20px; font-size: 0.95rem; }
+
+.top { display: flex; justify-content: space-between; align-items: center; padding-block: 20px; }
+.brand { font-size: 1.5rem; color: var(--charcoal); text-decoration: none; }
+
+.hero { position: relative; overflow: hidden; padding-block: 40px 72px; }
+.hero-inner { position: relative; z-index: 1; max-width: 640px; }
+.kicker { color: var(--sage); font-weight: 600; font-size: 1rem; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 4.2rem); max-width: 13ch; }
+.hero .lead { margin-top: 20px; color: #4A433B; max-width: 42ch; font-size: 1.15rem; }
+.cta-row { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px; }
+.ember-glyph {
+  position: absolute; right: -60px; top: -40px; width: 340px; height: 340px;
+  opacity: 0.9; z-index: 0;
+}
+@media (max-width: 700px) {
+  .ember-glyph { right: -120px; top: -60px; width: 260px; height: 260px; opacity: 0.5; }
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--white); border: 1px solid var(--line); border-radius: 999px;
+  padding: 7px 15px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #998F7E; flex-shrink: 0; }
+.badge.open .dot { background: var(--sage); }
+
+.section { padding-block: 60px; }
+.section-head { margin-bottom: 36px; }
+.section-head h2 { font-size: clamp(2rem, 6vw, 2.6rem); }
+.section-head p { color: #4A433B; margin-top: 8px; max-width: 52ch; }
+
+.menu-group { margin-bottom: 40px; }
+.menu-group:last-child { margin-bottom: 0; }
+.menu-group h3 {
+  font-size: 1.3rem; color: var(--sage); margin-bottom: 4px;
+  border-bottom: 2px solid var(--sage); display: inline-block; padding-bottom: 4px;
+}
+.menu-list { list-style: none; margin-top: 18px; }
+.menu-item {
+  display: flex; justify-content: space-between; gap: 20px;
+  padding: 16px 0; border-top: 1px solid var(--line);
+}
+.menu-group:last-child .menu-list li:last-child { border-bottom: 1px solid var(--line); }
+.menu-item-name { font-weight: 600; font-size: 1.08rem; }
+.menu-item-desc { color: #6B6155; font-size: 0.95rem; margin-top: 2px; max-width: 46ch; }
+.menu-item-price { color: var(--terracotta); font-weight: 700; white-space: nowrap; font-size: 1.05rem; }
+
+.notice-box {
+  margin-top: 36px; background: var(--white); border: 1px solid var(--line);
+  border-left: 4px solid var(--terracotta); border-radius: 4px; padding: 20px 22px;
+}
+.notice-box p { font-size: 0.95rem; color: #4A433B; margin-bottom: 6px; }
+.notice-box p:last-child { margin-bottom: 0; }
+
+.reasons { background: var(--white); }
+.reason-list { display: grid; gap: 28px; }
+.reason { border-top: 3px solid var(--terracotta); padding-top: 14px; }
+.reason h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.reason p { color: #4A433B; }
+@media (min-width: 820px) {
+  .reason-list { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+}
+
+.sample-note { margin-top: -10px; margin-bottom: 28px; color: #6B6155; font-size: 0.92rem; }
+.reviews { display: grid; gap: 24px; }
+.review { background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 24px; }
+.review p { font-size: 1.08rem; color: var(--charcoal); }
+.review figcaption { margin-top: 14px; font-weight: 600; color: var(--sage); font-size: 0.92rem; }
+@media (min-width: 900px) {
+  .reviews { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+}
+
+.contact { background: var(--charcoal); color: var(--cream); padding-block: 68px; }
+.contact h2 { color: var(--cream); }
+.contact-lead { max-width: 44ch; margin: 14px 0 28px; color: #C9BFAE; }
+.contact .btn-ghost { border-color: var(--cream); color: var(--cream); }
+.contact .btn-ghost:hover { background: var(--cream); color: var(--charcoal); }
+.contact-grid { margin-top: 48px; display: grid; gap: 34px; }
+.contact h3 { font-size: 1.2rem; color: var(--terracotta); margin-bottom: 12px; }
+.hours { list-style: none; }
+.hours li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid rgba(247,241,231,0.15); font-size: 0.95rem; }
+.hours li.today { font-weight: 700; color: var(--white); }
+.hours li.today span:first-child::after { content: " (today)"; color: var(--terracotta); font-weight: 600; }
+.contact .maplink { color: var(--cream); font-weight: 600; text-decoration-color: var(--terracotta); }
+.delivery-areas { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+.delivery-areas span { background: rgba(247,241,231,0.08); border: 1px solid rgba(247,241,231,0.2); border-radius: 999px; padding: 4px 12px; font-size: 0.85rem; }
+@media (min-width: 780px) {
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 56px; }
+}
+
+.foot { background: var(--charcoal); color: #8A8072; font-size: 0.88rem; padding-bottom: 28px; }
+.foot .wrap { border-top: 1px solid rgba(247,241,231,0.12); padding-top: 18px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#">Ember &amp; Thyme</a>
+  <a class="btn btn-sm" href="https://wa.me/442079460958?text=Hi%20Ember%20%26%20Thyme%2C%20I%27d%20like%20to%20order.">Order on WhatsApp</a>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <svg class="ember-glyph" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <circle cx="100" cy="100" r="98" fill="none" stroke="#C65D3B" stroke-width="1.5" opacity="0.5"/>
+      <path d="M100 40 C70 70 70 110 100 160 C130 110 130 70 100 40 Z" fill="#C65D3B" opacity="0.85"/>
+      <path d="M100 70 C85 90 85 115 100 140 C115 115 115 90 100 70 Z" fill="#F7F1E7" opacity="0.9"/>
+    </svg>
+    <div class="hero-inner">
+      <p class="badge" id="status"><span class="dot"></span><span id="status-text">Open today, see hours below</span></p>
+      <p class="kicker">Peckham, London</p>
+      <h1>Modern Nigerian dining, grilled over ember.</h1>
+      <p class="lead">Smoky jollof, grilled specialties and comfort food, made for sharing. Order on WhatsApp, or come dine with us.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://wa.me/442079460958?text=Hi%20Ember%20%26%20Thyme%2C%20I%27d%20like%20to%20order.">Order on WhatsApp</a>
+        <a class="btn btn-ghost" href="#menu">View menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="section wrap" id="menu">
+    <div class="section-head">
+      <h2>Menu</h2>
+      <p>Menu availability can change depending on ingredients. Prices are subject to change.</p>
+    </div>
+
+    <div class="menu-group">
+      <h3>Starters</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div><span class="menu-item-name">Pepper Chicken Wings</span><div class="menu-item-desc">Grilled chicken wings tossed in our house pepper sauce.</div></div>
+          <span class="menu-item-price">£7.50</span>
+        </li>
+        <li class="menu-item">
+          <div><span class="menu-item-name">Loaded Suya Fries</span><div class="menu-item-desc">Crispy fries topped with suya-spiced beef, onions and house sauce.</div></div>
+          <span class="menu-item-price">£6.50</span>
+        </li>
+        <li class="menu-item">
+          <div><span class="menu-item-name">Plantain &amp; Pepper Sauce</span><div class="menu-item-desc">Fried ripe plantain served with spicy house pepper sauce.</div></div>
+          <span class="menu-item-price">£5.50</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="menu-group">
+      <h3>Main dishes</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div><span class="menu-item-name">Ember Jollof &amp; Grilled Chicken</span><div class="menu-item-desc">Smoky Nigerian jollof rice with grilled chicken and plantain.</div></div>
+          <span class="menu-item-price">£13.50</span>
+        </li>
+        <li class="menu-item">
+          <div><span class="menu-item-name">Asun Pasta</span><div class="menu-item-desc">Creamy pasta with spicy diced grilled goat meat.</div></div>
+          <span class="menu-item-price">£15.50</span>
+        </li>
+        <li class="menu-item">
+          <div><span class="menu-item-name">Grilled Chicken Rice Bowl</span><div class="menu-item-desc">Seasoned rice, grilled chicken, vegetables and house sauce.</div></div>
+          <span class="menu-item-price">£13.00</span>
+        </li>
+        <li class="menu-item">
+          <div><span class="menu-item-name">Smoky Beef Suya Bowl</span><div class="menu-item-desc">Suya-spiced beef with rice, vegetables and signature sauce.</div></div>
+          <span class="menu-item-price">£16.50</span>
+        </li>
+        <li class="menu-item">
+          <div><span class="menu-item-name">Seafood Pepper Rice</span><div class="menu-item-desc">Spiced rice with prawns, calamari and vegetables.</div></div>
+          <span class="menu-item-price">£18.50</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="menu-group">
+      <h3>Sides</h3>
+      <ul class="menu-list">
+        <li class="menu-item"><span class="menu-item-name">Jollof Rice</span><span class="menu-item-price">£4.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Fried Rice</span><span class="menu-item-price">£4.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Fried Plantain</span><span class="menu-item-price">£3.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">French Fries</span><span class="menu-item-price">£3.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Coleslaw</span><span class="menu-item-price">£3.00</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-group">
+      <h3>Drinks</h3>
+      <ul class="menu-list">
+        <li class="menu-item"><span class="menu-item-name">Chapman</span><span class="menu-item-price">£5.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Pineapple Ginger Cooler</span><span class="menu-item-price">£5.00</span></li>
+        <li class="menu-item"><span class="menu-item-name">Zobo &amp; Pineapple</span><span class="menu-item-price">£4.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Fresh Lemonade</span><span class="menu-item-price">£4.00</span></li>
+        <li class="menu-item"><span class="menu-item-name">Soft Drinks</span><span class="menu-item-price">£2.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Bottled Water</span><span class="menu-item-price">£2.00</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-group">
+      <h3>Desserts</h3>
+      <ul class="menu-list">
+        <li class="menu-item"><span class="menu-item-name">Classic Cheesecake</span><span class="menu-item-price">£6.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Chocolate Brownie &amp; Ice Cream</span><span class="menu-item-price">£6.50</span></li>
+        <li class="menu-item"><span class="menu-item-name">Caramelised Plantain Sundae</span><span class="menu-item-price">£6.00</span></li>
+      </ul>
+    </div>
+
+    <div class="notice-box">
+      <p><strong>Large orders of 10+ meals</strong> should be placed at least 24 hours in advance. Catering orders require advance confirmation, and custom catering packages are available on request.</p>
+      <p>Please let us know of any allergies before ordering.</p>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section reasons">
+    <div class="wrap">
+      <div class="section-head"><h2>Why Ember &amp; Thyme</h2></div>
+      <div class="reason-list">
+        <div class="reason">
+          <h3>Grilled over ember</h3>
+          <p>Our signature smoky flavour comes from grilling over real ember, not a shortcut.</p>
+        </div>
+        <div class="reason">
+          <h3>Nigerian-inspired, modern plating</h3>
+          <p>Familiar flavours, reimagined for a relaxed, modern dining experience in Peckham.</p>
+        </div>
+        <div class="reason">
+          <h3>Delivery across South London</h3>
+          <p>We deliver across Peckham and nearby areas, or you're welcome to dine in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section wrap">
+    <div class="section-head"><h2>What guests say</h2></div>
+    <p class="sample-note">Sample reviews shown for demonstration purposes.</p>
+    <div class="reviews">
+      <figure class="review">
+        <p>&ldquo;The jollof and grilled chicken were incredible. Everything arrived hot and well packaged.&rdquo;</p>
+        <figcaption>Sample Customer Review</figcaption>
+      </figure>
+      <figure class="review">
+        <p>&ldquo;Beautiful atmosphere, great service and the Asun Pasta was amazing.&rdquo;</p>
+        <figcaption>Sample Customer Review</figcaption>
+      </figure>
+      <figure class="review">
+        <p>&ldquo;One of my favourite spots for a relaxed dinner in Peckham.&rdquo;</p>
+        <figcaption>Sample Customer Review</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Visit or order</h2>
+      <p class="contact-lead">Message us on WhatsApp to order, or find us in Peckham for a sit-down meal.</p>
+      <a class="btn btn-ghost" href="https://wa.me/442079460958?text=Hi%20Ember%20%26%20Thyme%2C%20I%27d%20like%20to%20order.">Order on WhatsApp</a>
+
+      <div class="contact-grid">
+        <div>
+          <h3>Opening hours</h3>
+          <ul class="hours">
+            <li data-group="mon-thu"><span>Monday&ndash;Thursday</span><span>11am&ndash;10pm</span></li>
+            <li data-group="fri"><span>Friday</span><span>11am&ndash;11pm</span></li>
+            <li data-group="sat"><span>Saturday</span><span>12pm&ndash;11pm</span></li>
+            <li data-group="sun"><span>Sunday</span><span>12pm&ndash;9pm</span></li>
+          </ul>
+          <p style="margin-top:12px;font-size:0.85rem;color:#C9BFAE;">Kitchen closes 30 minutes before closing time.</p>
+        </div>
+        <div>
+          <h3>Location &amp; delivery</h3>
+          <p>Rye Lane, Peckham, London SE15</p>
+          <p style="margin-top:4px;"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Rye+Lane+Peckham+London+SE15">Open in Google Maps</a></p>
+          <div class="delivery-areas">
+            <span>Peckham</span><span>Nunhead</span><span>Camberwell</span><span>Dulwich</span><span>Brixton</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>&copy; 2026 Ember &amp; Thyme, Peckham, London. Practice project: Ember &amp; Thyme is a fictional restaurant.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var SCHEDULE = {
+    Mon: [11*60, 22*60], Tue: [11*60, 22*60], Wed: [11*60, 22*60], Thu: [11*60, 22*60],
+    Fri: [11*60, 23*60], Sat: [12*60, 23*60], Sun: [12*60, 21*60]
+  };
+  var GROUP = { Mon: "mon-thu", Tue: "mon-thu", Wed: "mon-thu", Thu: "mon-thu", Fri: "fri", Sat: "sat", Sun: "sun" };
+
+  var parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false
+  }).formatToParts(new Date());
+  var t = {};
+  parts.forEach(function (p) { t[p.type] = p.value; });
+
+  var day = t.weekday;
+  var mins = (parseInt(t.hour, 10) % 24) * 60 + parseInt(t.minute, 10);
+  var todays = SCHEDULE[day];
+  var isOpen = todays && mins >= todays[0] && mins < todays[1];
+
+  var text;
+  if (isOpen) {
+    var closeH = Math.floor(todays[1] / 60), suffix = closeH >= 12 ? "pm" : "am";
+    var display = (closeH > 12 ? closeH - 12 : closeH) + suffix;
+    text = "Open now until " + display;
+  } else {
+    text = "Closed now. See hours below";
+  }
+
+  var badge = document.getElementById("status");
+  document.getElementById("status-text").textContent = text;
+  if (isOpen) { badge.classList.add("open"); }
+
+  var row = document.querySelector('[data-group="' + GROUP[day] + '"]');
+  if (row) { row.classList.add("today"); }
+})();
+</script>
+
+<!-- AI agent widget -->
+<script src="/widget.js"></script>
+
+</body>
+</html>

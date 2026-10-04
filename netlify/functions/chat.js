@@ -141,7 +141,7 @@ Keep replies short — 2 to 4 sentences, unless reciting a menu section.`;
 function corsHeaders() {
   return {
     // EDIT: replace with this site's real Netlify URL once deployed.
-    "Access-Control-Allow-Origin": "https://YOUR-SITE-NAME.netlify.app",
+    "Access-Control-Allow-Origin": "https://resilient-zabaione-735c82.netlify.app/",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Content-Type": "application/json",

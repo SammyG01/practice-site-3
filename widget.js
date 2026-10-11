@@ -1,12 +1,6 @@
-/**
- * Ember & Thyme chat widget ("Ember AI") with lead capture.
- * Loads via: <script src="/widget.js"></script>
- * Chat talks to /.netlify/functions/chat. The "Leave your details" form posts to
- * Netlify Forms (needs the hidden "chat-leads" form in index.html, see the lesson).
- */
 (function () {
   const ENDPOINT = "/.netlify/functions/chat";
-  const FORM_NAME = "chat-leads"; // must match the name of the hidden form in index.html
+  const FORM_NAME = "chat-leads"; 
   let conversation = [];
 
   const style = document.createElement("style");
